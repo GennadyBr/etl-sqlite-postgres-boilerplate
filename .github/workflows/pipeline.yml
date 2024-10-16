@@ -1,0 +1,36 @@
+name: Python Boilerplate
+
+on:
+  push:
+    branches: [ main, dev, master ]
+  pull_request:
+    branches: [ main, dev, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Copy files
+        uses: actions/checkout@v2
+      - name: Install python3.11
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | python3.11 -
+      - name: Add Poetry to path
+        run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
+      - name: Change poetry config
+        run: |
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+      - name: Install venv
+        run: |
+          poetry install --no-interaction
+          poetry update
+      - name: Lint
+        run: |
+          poetry run flake8 .
+          poetry run mypy .
+      - name: Test
+        run: poetry run pytest tests/tests.py
