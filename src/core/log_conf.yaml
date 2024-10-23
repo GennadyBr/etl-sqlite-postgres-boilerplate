@@ -33,7 +33,7 @@ handlers:
     level: DEBUG
     formatter: file_rotation_formatter
     class: logging.handlers.RotatingFileHandler
-    filename: ../../ETL_coroutine_boilerplate/logs/logs.log
+    filename: ../etl-sqlite-postgres-boilerplate/logs/logs.log
     maxBytes: 1048576
     backupCount: 5
 loggers:

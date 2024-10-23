@@ -35,6 +35,5 @@ if __name__ == '__main__':
         app='main:app',
         host='0.0.0.0',
         port=8000,
-        log_config='core/log_conf.yaml',
-        reload=True,
+        log_config='src/core/log_conf.yaml',
     )
