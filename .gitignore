@@ -1,4 +1,5 @@
 logs/logs.log
+logs/logs.log*
 tests/logs.log
 
 # Byte-compiled / optimized / DLL files
