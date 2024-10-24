@@ -10,15 +10,15 @@ from src.core.error_messages import ErrorMessages
 from src.db.db import PGReturn, pg_execute
 from src.schemas.postgres import (FilmWork, Genre, GenreFilmWork, Person,
                                   PersonFilmWork, PGExecuteData)
-from src.schemas.schemas_tables import UserTables
+from src.schemas.schemas_tables import UsersTable
 from src.schemas.users import Users
 
 
 class RepositoryPG:
     """Repository PostgresSQL class"""
 
-    def __init__(self, params: UserTables):
-        self.params: UserTables = params
+    def __init__(self, params: UsersTable):
+        self.params: UsersTable = params
 
     @staticmethod
     def _name(name: str | None) -> str | None:

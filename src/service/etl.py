@@ -1,5 +1,5 @@
 from src.core.logger import logger
-from src.schemas.schemas_tables import UserTables
+from src.schemas.schemas_tables import UsersTable
 from src.service.postgres import RepositoryPG
 from src.service.sqlite import RepositorySQLite
 
@@ -17,7 +17,7 @@ def _step(sqlite_row_qty: int, step: int, i: int) -> int:
     return step if i + step < sqlite_row_qty else sqlite_row_qty - i
 
 
-def _get_pg_info(params: UserTables, transfer_report: dict) -> dict:
+def _get_pg_info(params: UsersTable, transfer_report: dict) -> dict:
     transfer_report[params.table_name]['pg_row_count'] = RepositoryPG(
         params,
     ).get_row_number_by_table()[0]
@@ -28,7 +28,7 @@ def etl_all() -> dict:
     step = 1000
     transfer_report: dict = {}
     for table_name in RepositorySQLite.get_all_table_names():
-        params = UserTables(schema_name='content', table_name=table_name)
+        params = UsersTable(schema_name='content', table_name=table_name)
         transfer_report = _get_sqlite_info(table_name, transfer_report)
         transfer_report = _get_pg_info(params, transfer_report)
         transfer_report[table_name]['loaded_count'] = 0
