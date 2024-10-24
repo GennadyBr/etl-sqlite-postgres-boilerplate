@@ -12,13 +12,16 @@ class LogSettings(BaseSettings):
     log_rotation_filename: str = f'{project_dir}/logs/logs.log'
 
 
+log_settings = LogSettings()
+
+
 class PGSettings(BaseSettings):
     """Settings"""
 
     class Config:
         """env file location"""
 
-        env_file = '../.env'
+        env_file = log_settings.project_dir + '/.env'
         env_file_encoding = 'utf-8'
 
     postgres_db: str | None = None
@@ -29,7 +32,6 @@ class PGSettings(BaseSettings):
 
 
 pg_settings = PGSettings()
-log_settings = LogSettings()
 
 dsn = {
     'dbname': pg_settings.postgres_db,
@@ -41,3 +43,5 @@ dsn = {
 
 if not os.path.exists(f'{log_settings.project_dir}/logs'):
     os.makedirs(f'{log_settings.project_dir}/logs')
+
+sqlite_file: str = f'{log_settings.project_dir}/src/db/db.sqlite'

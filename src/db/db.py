@@ -6,7 +6,7 @@ import psycopg
 from psycopg.connection import Cursor, Connection
 from psycopg.rows import Row
 
-from src.core.config import dsn
+from src.core.config import dsn, sqlite_file
 from src.core.error_messages import ErrorMessages
 from src.core.logger import logger
 from src.schemas.postgres import PGExecuteData
@@ -113,7 +113,7 @@ def pg_execute(
 
 def sqlite_execute(query: str) -> Any:
     """Get connection"""
-    with sqlite3.connect('db/db.sqlite') as conn:
+    with sqlite3.connect(sqlite_file) as conn:
 
         conn.row_factory = sqlite3.Row
         curs = conn.cursor()

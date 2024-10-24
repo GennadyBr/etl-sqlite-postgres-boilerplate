@@ -11,6 +11,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api.v1.etl import router as etl_router
 from src.api.v1.postgres import router as pg_router
 from src.api.v1.sqlite import router as sqlite_router
+from src.core.config import log_settings
 from src.middleware import LoggingMiddleware
 
 app = FastAPI(
@@ -35,5 +36,7 @@ if __name__ == '__main__':
         app='main:app',
         host='0.0.0.0',
         port=8000,
-        log_config='src/core/log_conf.yaml',
+        log_config=log_settings.log_config_filename,
+        app_dir='./src',
+        reload=True
     )

@@ -16,7 +16,7 @@ cp .env.example .env
 ### Run postgres db in docker
 ```
 docker compose up -d
-python src/main.py
+cd src && python main.py
 ```
 
 ## FastAPI open API

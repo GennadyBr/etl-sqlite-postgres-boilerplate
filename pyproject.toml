@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Extract data from SQLite"
+name = "Extract data from SQLite - Transform - Load to PostgresSQL"
 version = "0.1.0"
 description = ""
 authors = ["GennadyBr <gennady.budazhapov@gmail.com>"]
