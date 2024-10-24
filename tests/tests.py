@@ -1,16 +1,39 @@
 """ Test """
+from time import sleep
+
+import psycopg
 import pytest
 from httpx import ASGITransport, AsyncClient
 
 from src.core.logger import logger
 from src.main import app
 from src.schemas.schemas_tables import UsersTable
+from src.service.postgres import RepositoryPG
 
 table = UsersTable(
     schema_name='content',
     table_name='test_table',
 )
 item_id: str
+
+
+@pytest.mark.asyncio()
+async def test_ping_db() -> None:
+    """Test ping db"""
+    pg_db = RepositoryPG(table)
+    count = 0
+    while True and count < 10:
+        try:
+            result = pg_db.ping_db()
+            if result:
+                logger.info('Postgres Database connected')
+                break
+            else:
+                logger.info('Postgres not connected. Waiting...')
+        except psycopg.OperationalError:
+            logger.info('Postgres not connected. Waiting...')
+        count += 1
+        sleep(5)
 
 
 @pytest.mark.asyncio()

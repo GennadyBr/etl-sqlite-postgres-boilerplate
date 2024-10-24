@@ -2,6 +2,14 @@ alter database movies_database owner to app;
 create schema if not exists content;
 SET search_path TO content,public;
 
+-- auto-generate test table
+create table if not exists test_table
+(
+    id   uuid not null
+        primary key,
+    name varchar(255)
+);
+
 -- auto-generated definition
 create table if not exists film_work
 (
