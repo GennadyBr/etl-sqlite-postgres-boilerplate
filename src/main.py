@@ -38,5 +38,5 @@ if __name__ == '__main__':
         port=8000,
         log_config=log_settings.log_config_filename,
         app_dir='./src',
-        reload=True
+        reload=True,
     )
