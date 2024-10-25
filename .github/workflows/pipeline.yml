@@ -38,6 +38,6 @@ jobs:
           poetry run flake8 .
           poetry run mypy .
       - name: Docker
-        run: docker compose up -d
-      - name: test
-        run: poetry run pytest tests/tests.py
+        run: |
+          docker compose up -d
+          poetry run pytest tests/tests.py
